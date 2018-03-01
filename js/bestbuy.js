@@ -136,7 +136,11 @@ function generaUrl(searchvalue, cat, filteredValue) {
     productos = []
 
     // Construct the request Replace MyAppID with your Production AppID
-    url = 'https://api.bestbuy.com/v1/products((search='+value+')';
+    if(value.substring(value.length-3,value.length)=='%20'){
+        value = value.slice(0,-3);
+    }
+    url = 'https://api.bestbuy.com/v1/products((search='+value.split('%20').join('&search=')+')';
+    url = url.replace('search=&','');
     url += '&(categoryPath.id=' + cat + '))';
     url += '?apiKey=' + apikeyBB;
     url += '&sort=' + sort;

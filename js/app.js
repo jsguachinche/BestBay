@@ -268,7 +268,7 @@ function filtrarBusqueda() {
 
     arrayMarcaQuery.forEach(e => {
       // marca.push(e.value);
-      filtroFinal += e.value + " ";
+      filtroFinal += e.value + "";
 
     });
 
@@ -277,7 +277,7 @@ function filtrarBusqueda() {
 
     arrayPantallaQuery.forEach(e => {
       // pantalla.push(e.value);
-      filtroFinal += e.value + " ";
+      filtroFinal += e.value + "";
 
     });
     // color
@@ -285,7 +285,7 @@ function filtrarBusqueda() {
 
     arrayColorQuery.forEach(e => {
       // color.push(e.value);
-      filtroFinal += e.value + " ";
+      filtroFinal += e.value + "";
 
     });
     // pulgadas
@@ -293,7 +293,7 @@ function filtrarBusqueda() {
 
     arrayPulgadasQuery.forEach(e => {
       // pulgadas.push(e.value);
-      filtroFinal += e.value + " ";
+      filtroFinal += e.value + "";
 
     });
     // resolucion
@@ -301,7 +301,7 @@ function filtrarBusqueda() {
 
     arrayResolucionQuery.forEach(e => {
       // resolucion.push(e.value);
-      filtroFinal += e.value + " ";
+      filtroFinal += e.value + "";
 
     });
 

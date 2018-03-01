@@ -45,7 +45,6 @@
     margin-top: 2%;
     text-align: center;
     color: #222;
-    //background-color: rgb(59, 65, 64);
 }
 
 .btnproductos {
@@ -98,13 +97,16 @@ li {
 }
 
 .svg-inline--fa {
-    border: solid 1px black;
-    border-radius:   6px ;
-    padding: 2px;
+    
+    
     margin-top: 5px;
     font-size: 2em;
     cursor: pointer;
     color: rgba(67, 68, 67, 0.514);
+    transform: scale(1.1)
+}
+.svg-inline--fa:hover{
+    color:red
 }
 
 @media screen and (max-width: 1030px) {

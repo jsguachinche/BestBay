@@ -1,4 +1,4 @@
-function loginFacebook(){
+function loginTwitter(){
     var config = {
         apiKey: "AIzaSyA7jek9LWz3xNyGDpYtNjHOcw3nn9I8oz0",
         authDomain: "bestbay-1519376497801.firebaseapp.com",
@@ -11,14 +11,11 @@ function loginFacebook(){
 
       var auth = firebase.auth();
   
-      var provider = new firebase.auth.FacebookAuthProvider();
+      var provider = new firebase.auth.TwitterAuthProvider();
       auth.signInWithPopup(provider).then(function (result) {
           // User signed in!
           console.log(result);
-          var nombre = result.additionalUserInfo.profile.first_name;
-         var h =  document.getElementsByClassName('display-5')[0]
-         h.innerHTML = nombre + ' <i class="far fa-user" onclick="deslog()"></i>';
-
+  
       }).catch(function (error) {
           // An error occurred
       });

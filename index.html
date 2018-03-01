@@ -28,38 +28,17 @@
         <img src="resources/images/bestbay.png" alt="BestBay Logo" class="img-title">
         <h2 class="subtitle">Su sitio de compra Online</h2>
         <div class="socials">
-            <label for="Iniciar sesión con" class="display-5">Log in:   
-                <!-- <span class="icon-fb" title="Conectarse con FaceBook" id="fb"></span>
-                <span class="icon-tw" title="Conectarse con Twitter" id="tw"></span>
-                <span class="icon-gp" title="Conectarse con Google+" id="gp"></span>
-                <span class="icon-gh" title="Conectarse con GitHub+" id="gp"></span> -->
-                <i class="far fa-user" data-toggle="modal" data-target="#exampleModal"></i>
+            <label for="Iniciar sesión con" class="display-5"><b style="font-size:1.5em;text-align: center;">Log in:   </b>  
+                    <div class="social btn" onclick="loginFacebook()"><i class="fab fa-facebook-square"></i></div>
+                    <div class="social btn" onclick="loginGithub()"><i class="fab fa-github"></i></div>
+                    <div class="social btn" onclick="loginTwitter()"><i class="fab fa-twitter-square"></i></div>
+                    <div class="social btn" onclick="LogGoogle()"><i class="fab fa-google"></i></i></div>
+                    
             </label>
         </div>
     </div>
 
-    <!-- Modal to log in -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Iniciar sesión con:</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                <a href="#" onclick="FB.logout()"></a>
-                <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true"
-                    data-use-continue-as="false" onclick="loginFacebook()"></div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
-      </div>
+    
     <!-- Container -->
     <div class="myContainer">
 
@@ -138,10 +117,12 @@
     <script src="js/style.js"></script>
     <script src="js/app.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+    <script src="js/widget-git.js"></script>
     <script src="js/widget-fb.js"></script>
-	
-	    <script type="text/babel" src="js/reactproducto.js"></script>
-
+    <script src="js/widget-twitter.js"></script>
+    <script src="js/widget-google.js"></script>
+	<script type="text/babel" src="js/reactproducto.js"></script>
     <script  type="text/babel" src="js/jqueryproductos.js"></script>
 
     <script src="js/bestbuy.js"></script>
