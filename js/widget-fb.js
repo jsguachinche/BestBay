@@ -9,6 +9,7 @@ window.fbAsyncInit = function () {
     FB.AppEvents.logPageView();
     FB.getLoginStatus(function (response) {
         statusChangeCallback(response);
+        console.log(response);
     });
     FB.logout(function(response) {
 // Person is now logged out
