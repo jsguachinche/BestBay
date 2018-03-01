@@ -1,0 +1,172 @@
+* {
+    box-sizing: border-box;
+    font-family: "calibri";
+    -webkit-font-smoothing: antialiased !important;
+}
+
+.myContainer {
+    margin: 1%;
+}
+
+.header {
+    border-bottom: #222 1px solid;
+}
+
+.img-title {
+    width: 20%;
+    margin-left: 38%;
+    padding: 1%;
+}
+
+.subtitle {
+    text-align: center;
+    color: #777;
+    font-size: 12px;
+}
+
+.socials {
+    margin-left: 80%;
+}
+
+.contenedor {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.productos {
+    width: 20%;
+    border-right: solid black 1px;
+    padding: 0.5%;
+}
+
+.ct {
+    padding: 1%;
+    margin-top: 2%;
+    text-align: center;
+    color: #222;
+    //background-color: rgb(59, 65, 64);
+}
+
+.btnproductos {
+    margin: 0.5%;
+    width: 100%;
+}
+
+.tcol {
+    font-size: 2em;
+    color: rgb(189, 231, 110);
+}
+
+.filtrado {
+    margin-top: 1%;
+}
+
+.ulPrecio {
+    padding: 1%;
+}
+
+.productos h5 {
+    margin: 1%;
+}
+
+li {
+    list-style: none;
+}
+
+.ContItemBB, .ContItem {
+    width: 37%;
+    border: solid 1px black;
+    margin: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, 0.2), 1px 6px 20px 1px rgba(0, 0, 0, 0.19);
+}
+
+.item {
+    text-align: center;
+    width: 25%;
+}
+
+.contReg {
+    width: 14%;
+    margin-left: 5px;
+    margin-top: 3px;
+    border-left: solid black 1px;
+    text-align: center;
+}
+
+.svg-inline--fa {
+    border: solid 1px black;
+    border-radius:   6px ;
+    padding: 2px;
+    margin-top: 5px;
+    font-size: 2em;
+    cursor: pointer;
+    color: rgba(67, 68, 67, 0.514);
+}
+
+@media screen and (max-width: 1030px) {
+    .item {
+        width: 40%;
+    }
+    .productos {
+        width: 30%;
+    }
+    .contReg {
+        width: 30%;
+    }
+    .ContItem, .ContItemBB {
+        width: 60%;
+    }
+}
+
+.footer {
+    width: 100%;
+    border: 1px solid #222;
+    background-color: rgb(211, 211, 211);
+}
+
+.footer p{
+    text-align: center;
+    margin: 1%;
+}
+
+.footer p:hover {
+    color: red;
+}
+
+@media screen and (max-width: 800px) {
+    .item {
+        width: 100%;
+    }
+    .productos {
+        width: 40%;
+    }
+    .contReg {
+        width: 30%;
+    }
+    .ContItem, .ContItemBB {
+        width: 60%;
+    }
+}
+
+#log {
+    width: 60px;
+    margin-top: 10px;
+}
+
+.current{
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: rgba(168, 165, 165, 0.568);
+    border: 1px solid #dee2e6;
+}
+#pagination-1>ul{
+    display: flex;
+}

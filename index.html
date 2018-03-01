@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/css-loader.css">
+    <link href="/css/simplePagination.css" rel="stylesheet">
+    <title>BEST BAY</title>
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+	
+	
+    <div class="loader loader-default"></div>
+    <div id="fb-root"></div>
+
+    <!-- Header -->
+    <div class="header">
+        <img src="resources/images/bestbay.png" alt="BestBay Logo" class="img-title">
+        <h2 class="subtitle">Su sitio de compra Online</h2>
+        <div class="socials">
+            <label for="Iniciar sesión con" class="display-5">Log in:   
+                <!-- <span class="icon-fb" title="Conectarse con FaceBook" id="fb"></span>
+                <span class="icon-tw" title="Conectarse con Twitter" id="tw"></span>
+                <span class="icon-gp" title="Conectarse con Google+" id="gp"></span>
+                <span class="icon-gh" title="Conectarse con GitHub+" id="gp"></span> -->
+                <i class="far fa-user" data-toggle="modal" data-target="#exampleModal"></i>
+            </label>
+        </div>
+    </div>
+
+    <!-- Modal to log in -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Iniciar sesión con:</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <a href="#" onclick="FB.logout()"></a>
+                <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true"
+                    data-use-continue-as="false"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- Container -->
+    <div class="myContainer">
+
+        <h2 class="display-5 text-center" id="title">Introduzca lo que quiera buscar y pulse en una categoria</h2>
+
+        <div class="contenedor">
+            <div class="productos">
+                <h5 class="display-6 ct">PRODUCTOS</h5>
+                <input type="text" class="form-control" name="" id="searchvalue" placeholder="Palabras a buscar">
+                <select class="form-control form-control-sm fg" id="filter-price">
+                    <option value="BestMatch">Mejores coincidencias</option>
+                    <option value="PricePlusShippingHighest">Mayor</option>
+                    <option value="PricePlusShippingLowest">Menor</option>
+                </select>
+                <button type="button" class="btn btn-outline-info btn-sm btnproductos" id="movil" value="smartphone">Smartphones</button>
+                <button type="button" class="btn btn-outline-info btn-sm btnproductos" id="tv" value="tv">TV</button>
+                <button type="button" class="btn btn-outline-info btn-sm btnproductos" id="fitness" value="fitness">Health, Fitness and Beauty</button>
+
+                <div class="filtrado"></div>
+            </div>
+			
+			<div class="ContItem" id="ContItem">
+                
+
+            </div>
+			
+			<div class="ContItemBB" id="ContItemBB">
+				<table class="tableBB table-hover">
+					<tbody>
+
+					</tbody>
+				</table>
+			</div>
+ 
+
+			
+
+            <!--<div class="contReg">
+
+                <i class="far fa-user"></i>
+                <h5 class="display-6 ct">Iniciar sesión con:</h5>
+                <a href="#" onclick="FB.logout()"></a>
+                <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true"
+                    data-use-continue-as="false"></div>
+                <div class="logGoo">
+                    <img src="resources/images/git.png" id="log" alt="">
+                </div>
+                <div class="logTwitter">
+                    <img src="resources/images/goo.png" id="log" alt="">
+                </div>
+                <div class="logTwitter">
+                    <img src="resources/images/twitter.png" id="log" alt="">
+                </div>
+            </div>-->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>COPYRIGHT 2018 © BESTBUY
+            <br/>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/es/">
+                <img alt="Licencia de Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/3.0/es/88x31.png"
+                />
+            </a>
+        </p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+        <script src="js/jquery.simplePagination.js"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <script src="js/style.js"></script>
+    <script src="js/app.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script src="js/widget-fb.js"></script>
+	
+	    <script type="text/babel" src="js/reactproducto.js"></script>
+
+    <script  type="text/babel" src="js/jqueryproductos.js"></script>
+
+    <script src="js/bestbuy.js"></script>
+</body>
+
+</html>
