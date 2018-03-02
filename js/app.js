@@ -1,37 +1,37 @@
+
 var apikey = 'jsguachi-JSGuachi-PRD-843252cae-6ff77db1'; // ebay
 var apikeyForex = 'BunYSIcXTAp38eCsdvLVzkflhfM7VPxH'; // forex
 var value;
 var ultimoTipoBusqueda;
+
+var productosEB = [];
+
 function _cb_findItemsByKeywords(root) {
   var items = root.findItemsByKeywordsResponse[0].searchResult[0].item || [];
-  var html = [];
-  html.push('<table class="table table-hover "><tbody>');
+
+  productosEB = [];
+  
+  $('.tableEB tbody').empty();
   for (var i = 0; i < items.length; ++i) {
     var item = items[i];
-    var title = item.title;
-    var pic = item.galleryURL;
-    var viewitem = item.viewItemURL;
-    var price = item.sellingStatus[0].currentPrice[0].__value__;
-    var type = item.sellingStatus[0].currentPrice[0]["@currencyId"];
-    if (null != title && null != viewitem) {
-      html.push(`<tr class="tbSelector"><th score="row">${i + 1}<td><img src="${pic}" class="img-thumbnail"></td>
-          <td><a href="${viewitem}" title="${title}" target="_blank">${title}</a></td><td>Precio: ${price} tipo moneda: ${type}</td></tr>`);
-    }
+
+    var productoEB = new Producto(i+1, item.galleryURL, item.viewItemURL, item.title, item.sellingStatus[0].currentPrice[0].__value__, item.sellingStatus[0].currentPrice[0]["@currencyId"]);
+    productosEB.push(productoEB);
   }
-  html.push('</tbody></table>');
-  document
-    .getElementById("ContItem")
-    .innerHTML = html.join("");
+
+
+  productListReact(productosEB, '#contItem', '.tableEB tbody');
+
   $('.ContItem').append('<div id="pagination-1"></div>');
 
   /*paginado*/
-  /*
   paginate({
-    itemSelector: '.tbSelector',
+    itemSelector: '.eb',
     paginationSelector: '#pagination-1',
     itemsPerPage: 10
-  });*/
+  });
 }
+
 var filterarray = [
   {
     "name": `MaxPrice`,
@@ -69,7 +69,7 @@ function buildURLArray() {
     for (var index in itemfilter) {
       // Check to see if the paramter has a value (some don't)
       if (itemfilter[index] !== "") {
-        if (itemfilter[index]instanceof Array) {
+        if (itemfilter[index] instanceof Array) {
           for (var r = 0; r < itemfilter[index].length; r++) {
             var value = itemfilter[index][r];
             urlfilter += "&itemFilter\(" + i + "\)." + index + "\(" + r + "\)=" + value;
@@ -88,20 +88,6 @@ buildURLArray(filterarray);
 $('.productos')
   .find('button')
   .click(function () {
-    // value = $(this).val(); console.log(value); valueBuscar =
-    // $('#searchvalue').val(); var filterPrice = $('#filter-price').val(); //
-    // Construct the request // Replace MyAppID with your Production AppID var url =
-    // `http://svcs.ebay.com/services/search/FindingService/v1`; url +=
-    // `?OPERATION-NAME=findItemsByKeywords`; url += `&SERVICE-VERSION=1.0.0`; url
-    // += `&SECURITY-APPNAME=${apikey}`; url += `&GLOBAL-ID=EBAY-ES`; url +=
-    // `&RESPONSE-DATA-FORMAT=JSON`; url += `&callback=_cb_findItemsByKeywords`; url
-    // += `&REST-PAYLOAD`; url += `&keywords=${valueBuscar}`; url +=
-    // `&paginationInput.entriesPerPage=200`; url += urlfilter; url +=
-    // `&sortOrder=BestMatch` // Submit the request s =
-    // document.createElement('script'); // create script element s.src = url;
-    // document.body.appendChild(s); // $('#filter-price').show('slow');
-    // peticionAJAX(value);
-
     $('#title').hide();
 
     valueType = $(this).val();
@@ -128,9 +114,6 @@ $('.productos')
     url += `&keywords=${value}`;
     url += `&paginationInput.entriesPerPage=200`;
     url += `&sortOrder=${filterPrice}`
-
-    // // Submit the request s = document.createElement('script'); // create script
-    // element s.src = url; document.body.appendChild(s); peticionAJAX(value);
 
     $.ajax({
       url: url,
@@ -170,7 +153,7 @@ function peticionAJAX(e) {
   });
 }
 
-function Login() {}
+function Login() { }
 
 function paginate(options) {
   var items = $(options.itemSelector);
@@ -182,7 +165,7 @@ function paginate(options) {
   $(options.paginationSelector).pagination({
     items: numItems,
     itemsOnPage: perPage,
-    cssStyle: "dark-theme",
+    cssStyle: "compact-theme",
     onPageClick: function (pageNumber) {
       var showFrom = perPage * (pageNumber - 1);
       var showTo = showFrom + perPage;
@@ -359,11 +342,8 @@ function ebayFiltrado() {
   url += `&callback=_cb_findItemsByKeywords`;
   url += `&REST-PAYLOAD`;
   url += `&keywords=${value}`;
-  url += `&paginationInput.entriesPerPage=200`;
-  url += `&sortOrder=${filterPrice}`
-  
-  // // Submit the request s = document.createElement('script'); // create script
-  // element s.src = url; document.body.appendChild(s); peticionAJAX(value);
+  url += `&paginationInput.entriesPerPage=100`;
+  url += `&sortOrder=${filterPrice}`;
 
   $.ajax({
     url: url,
