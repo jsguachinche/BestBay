@@ -3,12 +3,13 @@
  */
 var apikeyBB = 'A0iJvovzx1h8jN9IXhGSCwjm';
 
-function Producto(orden, thumb, url, nombre, precio) {
-    this.orden = orden
-    this.thumb = thumb
-    this.url = url
-    this.nombre = nombre
-    this.precio = precio
+function Producto(orden, thumb, url, nombre, precio, moneda) {
+    this.orden = orden;
+    this.thumb = thumb;
+    this.url = url;
+    this.nombre = nombre;
+    this.precio = precio;
+    this.moneda = moneda;
 }
 
 var productos = []
@@ -19,21 +20,8 @@ var urlfilter = "";
 var categoriaMovil = 'pcmcat209400050001';
 var categoriaTV = 'abcat0101000';
 var categoriaSalud = 'pcmcat242800050021';
-// var categoria = categoriaMovil;
+
 var url = '';
-
-/*
-$( document ).ready(function() {
-    readBBJson(url);
-
-})
-*/
-
-// {image:
-// "https://img.bbystatic.com/BestBuy_US/images/products/5758/5758300_sa.jpg",
-// color: "Sterling Silver", name: "Samsung - 75" Class (74.5" Diag.) - LED -
-// Curved -… - Smart - 4K Ultra HD TV with High Dynamic Range", salePrice:
-// 3999.99}
 
 function precioDollarEuro(precio, pos) {
     precio = Math.round(precio * 100);
@@ -43,7 +31,6 @@ function precioDollarEuro(precio, pos) {
             $('#loader').show();
         },
         success: function (data) {
-            //console.warn(data);
             euros = data.value / 100;
             euros = Math.round(euros * 100) / 100
             productos[pos].precio = euros;
@@ -81,7 +68,8 @@ function readBBJson(cat, value) {
         ultimoTipoBusqueda = "Fitness"
         
     }
-    // categoria = categoriaSalud
+
+
     generaUrl(searchvalue, categoria, value);
 
     var request = $.ajax({type: 'GET', url: url, dataType: 'json'});
@@ -95,14 +83,43 @@ function readBBJson(cat, value) {
                 productos.push(producto);
                 cont++;
             })
-        conviertePrecios()
+        conviertePrecios();
+        $('.ContItemBB').append('<div id="pagination-2"></div>');
+        paginate({
+            itemSelector: '.bb',
+            paginationSelector: '#pagination-2',
+            itemsPerPage: 10
+        });
     });
 }
 
 function conviertePrecios() {
 
     //  precioDollarEuro(productos[0].precio, 0)
-    productListReact(productos, '#contItem');
+    productListReact(productos, '#contItemBB', '.tableBB tbody');
+}
+
+function paginate(options) {
+    var items = $(options.itemSelector);
+    var numItems = items.length;
+    var perPage = options.itemsPerPage;
+    items
+        .slice(perPage)
+        .hide();
+    $(options.paginationSelector).pagination({
+        items: numItems,
+        itemsOnPage: perPage,
+        cssStyle: "compact-theme",
+        onPageClick: function (pageNumber) {
+            var showFrom = perPage * (pageNumber - 1);
+            var showTo = showFrom + perPage;
+            items
+                .hide()
+                .slice(showFrom, showTo)
+                .show();
+            return false;
+        }
+    });
 }
 
 $('#filter-price')
@@ -149,66 +166,3 @@ function generaUrl(searchvalue, cat, filteredValue) {
     url += '&pageSize=100';
     url += '&format=json';
 }
-
-// url += urlfilter;
-// https://api.bestbuy.com/v1/products((search=galaxy)&manufacturer=samsung&saleP
-// rice>=100&salePrice<=500&color=black&(categoryPath.id=pcmcat209400050001))?api
-// Key=A0iJvovzx1h8jN9IXhGSCwjm&sort=name.asc&show=name,salePrice,thumbnailImage,
-// image,url&format=json var url =
-// 'https://api.bestbuy.com/v1/products((search=Samsung&search=4G)';
-
-/*
-// Submit the request
-s=document.createElement('script'); // create script element
-s.src= url;
-document.body.appendChild(s);
-
-// Display the request as a clickable link for testing
-document.write("<a href=\"" + url + "\">" + url + "</a>");
-*/
-
-/*
-// Create a JavaScript array of the item filters you want to use in your request
-var filterarray = [
-    {"name":"MaxPrice",
-     "value":"25",
-     "paramName":"Currency",
-     "paramValue":"USD"},
-    {"name":"FreeShippingOnly",
-     "value":"true",
-     "paramName":"",
-     "paramValue":""},
-    {"name":"ListingType",
-     "value":["AuctionWithBIN", "FixedPrice", "StoreInventory"],
-     "paramName":"",
-     "paramValue":""},
-    ];
-
-
-// Generates an indexed URL snippet from the array of item filters
-function  buildURLArray() {
-    // Iterate through each filter in the array
-    for(var i=0; i<filterarray.length; i++) {
-      //Index each item filter in filterarray
-      var itemfilter = filterarray[i];
-      // Iterate through each parameter in each item filter
-      for(var index in itemfilter) {
-        // Check to see if the paramter has a value (some don't)
-        if (itemfilter[index] !== "") {
-          if (itemfilter[index] instanceof Array) {
-            for(var r=0; r<itemfilter[index].length; r++) {
-            var value = itemfilter[index][r];
-            urlfilter += "&itemFilter\(" + i + "\)." + index + "\(" + r + "\)=" + value ;
-            }
-          }
-          else {
-            urlfilter += "&itemFilter\(" + i + "\)." + index + "=" + itemfilter[index];
-          }
-        }
-      }
-    }
-}  // End buildURLArray() function
-
-// Execute the function to build the URL filter
-buildURLArray(filterarray);
-*/
