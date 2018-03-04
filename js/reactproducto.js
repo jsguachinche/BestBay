@@ -8,7 +8,7 @@ var ProductoBBComponent = React.createClass({
   render: function (props) {
     return (
       <tr className="tbSelector bb">
-        <th score="row">{this.props.producto.orden}</th>
+        <th>{this.props.producto.orden}</th>
         <td>
           <img src={this.props.producto.thumb} className="img-thumbnail" />
         </td>
@@ -44,7 +44,7 @@ var ProductoEBComponent = React.createClass({
   render: function (props) {
     return (
       <tr className="tbSelector eb">
-        <th score="row">{this.props.producto.orden}</th>
+        <th>{this.props.producto.orden}</th>
         <td>
           <img src={this.props.producto.thumb} className="img-thumbnail" />
         </td>
