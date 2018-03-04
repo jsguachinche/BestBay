@@ -152,6 +152,17 @@ function generaUrl(cat, filteredValue) {
     $('.tableBB tbody').empty();
     productosBB = []
 
+    var minPrice = '';
+    var maxPrice = '';
+  
+    if ($('#desde').val() != undefined){
+      minPrice = `&salePrice>=${$('#desde').val()}`;
+    }
+    
+    if ($('#hasta').val() != undefined){
+      maxPrice = `&salePrice<=${$('#hasta').val()}`;
+    }
+
     arrayFiltros = filteredValue.split('%20');
     for (let i = arrayFiltros.length - 1; i >= 0; i--) {
         if (arrayFiltros[i] == '')
@@ -167,7 +178,10 @@ function generaUrl(cat, filteredValue) {
         url += ')&'
         url = url.replace('&search', 'search');
     }
-    url += '(categoryPath.id=' + cat + '))';
+    url += '(categoryPath.id=' + cat + ')';
+    url += minPrice;
+    url += maxPrice;
+    url += ')';
     url += '?apiKey=' + apikeyBB;
     url += '&sort=' + sort;
     url += '&show=thumbnailImage,url,name,salePrice';

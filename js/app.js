@@ -1,3 +1,25 @@
+var config = {
+  apiKey: "AIzaSyA7jek9LWz3xNyGDpYtNjHOcw3nn9I8oz0",
+  authDomain: "bestbay-1519376497801.firebaseapp.com",
+  databaseURL: "https://bestbay-1519376497801.firebaseio.com",
+  projectId: "bestbay-1519376497801",
+  storageBucket: "bestbay-1519376497801.appspot.com",
+  messagingSenderId: "730955629296"
+};
+
+firebase.initializeApp(config);
+
+
+var nombre = localStorage.getItem("user");
+
+if (nombre == null) {
+  var h = document.getElementsByClassName('display-5')[0]
+  h.innerHTML = '<b style="font-size:1.5em;text-align: center;">Conectarse desde: </b><div class="social btn" onclick="loginFacebook()"><i class="fab fa-facebook-square"></i></div><div class="social btn" onclick="loginGithub()"><i class="fab fa-github"></i></div><div class="social btn" onclick="loginTwitter()"><i class="fab fa-twitter-square"></i></div><div class="social btn" onclick="LogGoogle()"><i class="fab fa-google"></i></i></div>';
+} else {
+  var h = document.getElementsByClassName('display-5')[0]
+  h.innerHTML = '<b style="font-size:1.5em;text-align: center;">Bienvenido: </b>' + nombre + '<a href="#" onclick="logout()">  Cerrar sesión</a>';
+}
+
 
 var apikey = 'jsguachi-JSGuachi-PRD-843252cae-6ff77db1'; // ebay
 var apikeyBB = 'A0iJvovzx1h8jN9IXhGSCwjm'; //bestbuy
@@ -64,37 +86,35 @@ function _cb_findItemsByKeywords(root) {
   });
 }
 
-var filterarray = [
-  {
-    "name": `MaxPrice`,
-    "value": `3000`,
-    "paramName": `Currency`,
-    "paramValue": `USD`
-  }, {
-    "name": `MinPrice`,
-    "value": `0.1`,
-    "paramName": `Currency`,
-    "paramValue": `USD`
-  }, {
-    "name": `FreeShippingOnly`,
-    "value": `true`,
-    "paramName": "",
-    "paramValue": ""
-  }, {
-    "name": `ListingType`,
-    "value": [
-      `AuctionWithBIN`, `FixedPrice`, `StoreInventory`
-    ],
-    "paramName": "",
-    "paramValue": ""
-  }
-];
+var filterarray = [{
+  "name": `MaxPrice`,
+  "value": `3000`,
+  "paramName": `Currency`,
+  "paramValue": `USD`
+}, {
+  "name": `MinPrice`,
+  "value": `0.1`,
+  "paramName": `Currency`,
+  "paramValue": `USD`
+}, {
+  "name": `FreeShippingOnly`,
+  "value": `true`,
+  "paramName": "",
+  "paramValue": ""
+}, {
+  "name": `ListingType`,
+  "value": [
+    `AuctionWithBIN`, `FixedPrice`, `StoreInventory`
+  ],
+  "paramName": "",
+  "paramValue": ""
+}];
 
 var urlfilter = "";
 
 /** 
  * Función que construye los filstros de la URL.
-*/
+ */
 function buildURLArray() {
   // Iterate through each filter in the array
   for (var i = 0; i < filterarray.length; i++) {
@@ -117,9 +137,9 @@ function buildURLArray() {
 
 /** 
  * Hace que solo sea posible seleccionar un checkbox de cada grupo.
-*/
-function unCheckbox(){
-  $("input:checkbox").on('click', function() {
+ */
+function unCheckbox() {
+  $("input:checkbox").on('click', function () {
     var $box = $(this);
     if ($box.is(":checked")) {
       var group = "input:checkbox[name='" + $box.attr("name") + "']";
@@ -178,7 +198,7 @@ function filtrar(tipo) {
 
 /** 
  * Se crean los filtros para la URL según las opciones elegidas.
-*/
+ */
 function filtrarBusqueda() {
 
   var filtroFinal = "";
@@ -186,10 +206,10 @@ function filtrarBusqueda() {
   var search = $('#searchvalue').val();
   var arraySearch = []
   arraySearch = search.split(' ');
-    for (let i = arraySearch.length - 1; i >= 0; i--) {
-      if (arraySearch[i] != '')
+  for (let i = arraySearch.length - 1; i >= 0; i--) {
+    if (arraySearch[i] != '')
       filtroFinal += ('%20' + arraySearch[i]);
-    }
+  }
 
   if (ultimoTipoBusqueda == "smartphone") {
     // var marca = [],   memoria = [],   ram = [],   conectividad = [],   color =
@@ -277,8 +297,7 @@ function filtrarBusqueda() {
       // resolucion.push(e.value);
       filtroFinal += '%20' + e.value;
     });
-  }
-  else {
+  } else {
     // var tipo = [] Marca
     var arrayTipoQuery = document.querySelectorAll("input[name='fitnessTipo']:checked");
     arrayTipoQuery.forEach(e => {
@@ -291,9 +310,9 @@ function filtrarBusqueda() {
 
 /** 
  * Se llama a la búsqueda de la API BestBuy, dependiendo de la categoría.
-*/
+ */
 function bestBuyFiltrado() {
-  
+
   if (ultimoTipoBusqueda == "smartphone") {
     readBBJson(0, value);
   }
@@ -312,7 +331,24 @@ function bestBuyFiltrado() {
  */
 function ebayFiltrado(tipo) {
   $('#title').hide();
-  var filterPrice = $('#filter-price').val();
+
+  var minPrice = '';
+  var maxPrice = '';
+
+  if ($('#desde').val() != undefined){
+    minPrice = `&itemFilter.name=MinPrice
+    &itemFilter(0).value=${$('#desde').val()}
+    &itemFilter(0).paramName=Currency
+    &itemFilter(0).paramValue=EUR`;
+  }
+  
+  if ($('#hasta').val() != undefined){
+    maxPrice = `&itemFilter.name=MaxPrice
+    &itemFilter(1).value=${$('#hasta').val()}
+    &itemFilter(1).paramName=Currency
+    &itemFilter(1).paramValue=EUR`;
+  }
+ 
 
   $('#results').empty();
   var filterPrice = $('#filter-price').val();
@@ -325,6 +361,8 @@ function ebayFiltrado(tipo) {
   url += `&callback=_cb_findItemsByKeywords`;
   url += `&REST-PAYLOAD`;
   url += `&keywords=${value}`;
+  url += minPrice;
+  url += maxPrice;
   url += `&paginationInput.entriesPerPage=200`;
   url += `&sortOrder=${filterPrice}`
 

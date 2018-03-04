@@ -70,9 +70,9 @@ function collapseSM() {
                   <div class="collapse" id="collapse">
                       <div class="card card-block">
                           <p><label for="desde" class="col-form-label">Desde</label></p>
-                          <p><input type="number" class="col-sm" name="desde" min="1" max="2000" value="1"></p>
+                          <p><input id="desde" type="number" class="col-sm" name="desde" min="1" max="2000" value="1"></p>
                           <p><label for="hasta" class="col-form-label">Hasta</label></p>
-                          <p><input type="number" class="col-sm" name="hasta" min="1" max="2000" value="2000"></p>
+                          <p><input id="hasta" type="number" class="col-sm" name="hasta" min="1" max="2000" value="2000"></p>
                       </div>
                   </div>
               </div>
@@ -203,9 +203,9 @@ function collapseTV() {
                   <div class="collapse" id="collapse">
                       <div class="card card-block">
                           <p><label for="desde" class="col-form-label">Desde</label></p>
-                          <p><input type="number" class="col-sm" name="desde" min="1" max="2000" value="1"></p>
+                          <p><input id="desde" type="number" class="col-sm" name="desde" min="1" max="2000" value="1"></p>
                           <p><label for="hasta" class="col-form-label">Hasta</label></p>
-                          <p><input type="number" class="col-sm" name="hasta" min="1" max="2000" value="2000"></p>
+                          <p><input id="hasta" type="number" class="col-sm" name="hasta" min="1" max="2000" value="2000"></p>
                       </div>
                   </div>
               </div>
@@ -272,10 +272,12 @@ function collapseTV() {
           </div>
           <div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingFive">
               <div class="card-block">
-                  <p><input type="checkbox" name="tvPulgadas" value="20 - 39 "> 20 - 39 </p>
-                  <p><input type="checkbox" name="tvPulgadas" value="30 - 39"> 30 - 39</p>
-                  <p><input type="checkbox" name="tvPulgadas" value="40 - 49"> 40 - 49</p>
-                  <p><input type="checkbox" name="tvPulgadas" value="50 - 60"> 50 - 60</p>
+                  <p><input type="checkbox" name="tvPulgadas" value="24\""> 24\"</p>
+                  <p><input type="checkbox" name="tvPulgadas" value="28\""> 28\"</p>
+                  <p><input type="checkbox" name="tvPulgadas" value="32\""> 32\"</p>
+                  <p><input type="checkbox" name="tvPulgadas" value="42\""> 42\"</p>
+                  <p><input type="checkbox" name="tvPulgadas" value="48\""> 48\"</p>
+                  <p><input type="checkbox" name="tvPulgadas" value="60\""> 60\"</p>
               </div>
           </div>
       </div>
@@ -321,9 +323,9 @@ function collapseFT(){
                   <div class="collapse" id="collapse">
                       <div class="card card-block">
                           <p><label for="desde" class="col-form-label">Desde</label></p>
-                          <p><input type="number" class="col-sm" name="desde" min="1" max="2000" value="1"></p>
+                          <p><input id="desde" type="number" class="col-sm" name="desde" min="1" max="2000" value="1"></p>
                           <p><label for="hasta" class="col-form-label">Hasta</label></p>
-                          <p><input type="number" class="col-sm" name="hasta" min="1" max="2000" value="2000"></p>
+                          <p><input id="hasta" type="number" class="col-sm" name="hasta" min="1" max="2000" value="2000"></p>
                       </div>
                   </div>
               </div>
