@@ -1,125 +1,143 @@
-/**
- * esta es nuestra APIKEY publica
- */
-var apikeyBB = 'A0iJvovzx1h8jN9IXhGSCwjm';
 
-function Producto(orden, thumb, url, nombre, precio) {
-    this.orden = orden
-    this.thumb = thumb
-    this.url = url
-    this.nombre = nombre
-    this.precio = precio
-}
-
-var productos = []
-
-// Define global variable for the URL filter
+var productosBB = []
 var urlfilter = "";
-
 var categoriaMovil = 'pcmcat209400050001';
 var categoriaTV = 'abcat0101000';
 var categoriaSalud = 'pcmcat242800050021';
-// var categoria = categoriaMovil;
 var url = '';
 
-/*
-$( document ).ready(function() {
-    readBBJson(url);
-
-})
-*/
-
-// {image:
-// "https://img.bbystatic.com/BestBuy_US/images/products/5758/5758300_sa.jpg",
-// color: "Sterling Silver", name: "Samsung - 75" Class (74.5" Diag.) - LED -
-// Curved -… - Smart - 4K Ultra HD TV with High Dynamic Range", salePrice:
-// 3999.99}
-
-function precioDollarEuro(precio, pos) {
-    precio = Math.round(precio * 100);
+/**
+ * Función que llama a la API Forex para conseguir la conversión de euros a dolares. Llama a crear los productos en react y a la paginación.
+ * @param {*} precio 
+ */
+function precioDollarEuro(precio) {
     $.ajax({
         url: 'https://forex.1forge.com/1.0.3/convert?from=USD&to=EUR&quantity=' + (precio) + '&api_key=BunYSIcXTAp38eCsdvLVzkflhfM7VPxH',
         beforeSend: function () {
             $('#loader').show();
         },
         success: function (data) {
-            //console.warn(data);
-            euros = data.value / 100;
-            euros = Math.round(euros * 100) / 100
-            productos[pos].precio = euros;
-            if (pos < productos.length - 1) 
-                precioDollarEuro(productos[pos + 1].precio, pos + 1)
-            if (pos == productos.length - 1) 
-                productListReact(productos, '#contItem');
+            dollarEuro = data.value;
+            for (var i = 0; i < productosBB.length; i++) {
+                var euros = Math.round(productosBB[i].precio * dollarEuro * 100) / 100
+                productosBB[i].precio = euros;
             }
-        ,
+            productListReact(productosBB, '#contItemBB', '.tableBB tbody');
+            paginarBB();
+        },
         async: true,
         error: function (request, errorType, errorMessage) {
             alert('Error: ' + errorType + ' log: ' + errorMessage);
+            productListReact(productosBB, '#contItemBB', '.tableBB tbody');
+            paginarBB();
         }
     });
 }
 
+/**
+ * Función que llama a generar la URL de la petición y hace la petición a la API de BestBuy.
+ * @param {*} cat 
+ * @param {*} value 
+ */
 function readBBJson(cat, value) {
-    var searchvalue = "";
     if (cat == 0) {
-        searchvalue = "Samsung";
         categoria = categoriaMovil
-        ultimoTipoBusqueda = "Smartphone"
+        ultimoTipoBusqueda = "smartphone"
     }
-
     if (cat == 1) {
-        searchvalue = "Samsung";
         categoria = categoriaTV
-        ultimoTipoBusqueda = "TV"
-        
+        ultimoTipoBusqueda = "tv"
     }
-
     if (cat == 2) {
-        searchvalue = "Samsung";
         categoria = categoriaSalud;
-        ultimoTipoBusqueda = "Fitness"
-        
+        ultimoTipoBusqueda = "fitness"
     }
-    // categoria = categoriaSalud
-    generaUrl(searchvalue, categoria, value);
+    generaUrl(categoria, value);
 
-    var request = $.ajax({type: 'GET', url: url, dataType: 'json'});
-
-    request.done(function (msg) {
-        var cont = 1;
-        msg
-            .products
-            .forEach(element => {
+    $.ajax({
+        url: url,
+        dataType: "json",
+        beforeSend: function () {
+            buscandoBB = true;
+            $('.loader').addClass('is-active');
+        },
+        success: function (msg) {
+            var cont = 1;
+            msg.products.forEach(element => {
                 producto = new Producto(cont, element.thumbnailImage, element.url, element.name, element.salePrice);
-                productos.push(producto);
+                productosBB.push(producto);
                 cont++;
             })
-        conviertePrecios()
+            conviertePrecios();
+            buscandoBB = false;
+            if ((buscandoEB == false) && (buscandoBB == false))
+            $('.loader').removeClass('is-active');
+        },
+        error: function (error, codigo, desc) {
+            toastr.error('', 'Error conectando con BestBuy')
+            buscandoBB = false;
+        }
     });
 }
 
+/** 
+ * Llama a la API que convierte los precios con el valor de un dolar.
+*/
 function conviertePrecios() {
-
-    //  precioDollarEuro(productos[0].precio, 0)
-    productListReact(productos, '#contItem');
+    precioDollarEuro(1);
 }
 
-$('#filter-price')
-    .on('change', function () {})
+/** 
+ * Se establecen las opciones del paginador.
+*/
+function paginarBB() {
+    $('.ContItemBB').append('<div id="pagination-2"></div>');
+    paginate({
+        itemSelector: '.bb',
+        paginationSelector: '#pagination-2',
+        itemsPerPage: 10
+    });
+}
 
-function generaUrl(searchvalue, cat, filteredValue) {
+/**
+ * Se paginan los productos según las opciones establecidas.
+ * @param {*} options 
+ */
+function paginate(options) {
+    var items = $(options.itemSelector);
+    var numItems = items.length;
+    var perPage = options.itemsPerPage;
+    items
+        .slice(perPage)
+        .hide();
+    $(options.paginationSelector).pagination({
+        items: numItems,
+        itemsOnPage: perPage,
+        cssStyle: "compact-theme",
+        onPageClick: function (pageNumber) {
+            var showFrom = perPage * (pageNumber - 1);
+            var showTo = showFrom + perPage;
+            items
+                .hide()
+                .slice(showFrom, showTo)
+                .show();
+            return false;
+        }
+    });
+}
+
+/**
+ * Se genera la URL para la petición según la categoria y los filtros aplicados.
+ * @param {*} cat 
+ * @param {*} filteredValue 
+ */
+function generaUrl(cat, filteredValue) {
     value = $('#searchvalue').val();
-
-    if (value == "") {
-        value = searchvalue
-    }
 
     if (filteredValue != null) {
         value = filteredValue
     }
     filterPrice = $('#filter-price').val();
-
     var sort = "";
 
     if (filterPrice == "PricePlusShippingHighest") {
@@ -128,87 +146,31 @@ function generaUrl(searchvalue, cat, filteredValue) {
         sort = "salePrice.asc"
     } else {
         sort = "salePrice.asc"
-
     }
 
     url = '';
     $('.tableBB tbody').empty();
-    productos = []
+    productosBB = []
 
-    // Construct the request Replace MyAppID with your Production AppID
-    if(value.substring(value.length-3,value.length)=='%20'){
-        value = value.slice(0,-3);
+    arrayFiltros = filteredValue.split('%20');
+    for (let i = arrayFiltros.length - 1; i >= 0; i--) {
+        if (arrayFiltros[i] == '')
+            arrayFiltros.splice(i, 1)
     }
-    url = 'https://api.bestbuy.com/v1/products((search='+value.split('%20').join('&search=')+')';
-    url = url.replace('search=&','');
-    url += '&(categoryPath.id=' + cat + '))';
+    if (arrayFiltros.length == 0)
+        url = 'https://api.bestbuy.com/v1/products(';
+    else {
+        url = 'https://api.bestbuy.com/v1/products((';
+        for (let i = 0; i < arrayFiltros.length; i++) {
+            url += '&search=' + arrayFiltros[i];
+        }
+        url += ')&'
+        url = url.replace('&search', 'search');
+    }
+    url += '(categoryPath.id=' + cat + '))';
     url += '?apiKey=' + apikeyBB;
     url += '&sort=' + sort;
-    url += '&show=thumbnailImage,url,color,name,salePrice';
-    url += '&facet=color';
+    url += '&show=thumbnailImage,url,name,salePrice';
     url += '&pageSize=100';
     url += '&format=json';
 }
-
-// url += urlfilter;
-// https://api.bestbuy.com/v1/products((search=galaxy)&manufacturer=samsung&saleP
-// rice>=100&salePrice<=500&color=black&(categoryPath.id=pcmcat209400050001))?api
-// Key=A0iJvovzx1h8jN9IXhGSCwjm&sort=name.asc&show=name,salePrice,thumbnailImage,
-// image,url&format=json var url =
-// 'https://api.bestbuy.com/v1/products((search=Samsung&search=4G)';
-
-/*
-// Submit the request
-s=document.createElement('script'); // create script element
-s.src= url;
-document.body.appendChild(s);
-
-// Display the request as a clickable link for testing
-document.write("<a href=\"" + url + "\">" + url + "</a>");
-*/
-
-/*
-// Create a JavaScript array of the item filters you want to use in your request
-var filterarray = [
-    {"name":"MaxPrice",
-     "value":"25",
-     "paramName":"Currency",
-     "paramValue":"USD"},
-    {"name":"FreeShippingOnly",
-     "value":"true",
-     "paramName":"",
-     "paramValue":""},
-    {"name":"ListingType",
-     "value":["AuctionWithBIN", "FixedPrice", "StoreInventory"],
-     "paramName":"",
-     "paramValue":""},
-    ];
-
-
-// Generates an indexed URL snippet from the array of item filters
-function  buildURLArray() {
-    // Iterate through each filter in the array
-    for(var i=0; i<filterarray.length; i++) {
-      //Index each item filter in filterarray
-      var itemfilter = filterarray[i];
-      // Iterate through each parameter in each item filter
-      for(var index in itemfilter) {
-        // Check to see if the paramter has a value (some don't)
-        if (itemfilter[index] !== "") {
-          if (itemfilter[index] instanceof Array) {
-            for(var r=0; r<itemfilter[index].length; r++) {
-            var value = itemfilter[index][r];
-            urlfilter += "&itemFilter\(" + i + "\)." + index + "\(" + r + "\)=" + value ;
-            }
-          }
-          else {
-            urlfilter += "&itemFilter\(" + i + "\)." + index + "=" + itemfilter[index];
-          }
-        }
-      }
-    }
-}  // End buildURLArray() function
-
-// Execute the function to build the URL filter
-buildURLArray(filterarray);
-*/

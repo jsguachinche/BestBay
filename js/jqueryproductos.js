@@ -1,8 +1,8 @@
 
 
 
-function productListReact(productos, element) {
-  var list = $('.tableBB tbody');
+function productListReact(productos, element, hijoElemento) {
+  var list = $(hijoElemento);
 
   // clean up any mounted React components
   $(element).find('.tbSelector').each(function () {
@@ -10,7 +10,7 @@ function productListReact(productos, element) {
   });
 
   productos.forEach(function (producto) {
-    var productoContainer = $('<span class="divProducto"></span>');
+    var productoContainer = $('<div class="divProducto"></div>');
 
     // add product data to use in our React component
     productoContainer.data('producto', producto);
@@ -19,7 +19,7 @@ function productListReact(productos, element) {
   });
 
     // replace the existing list if there is one
-    var currentList = $(element).find('.tableBB tbody');
+    var currentList = $(element).find(hijoElemento);
     if (currentList.length) {
       currentList.replaceWith(list);
     } else {
@@ -34,7 +34,10 @@ function productListReact(productos, element) {
     /* React needs a plain, non-jQueryfied DOM 
      * element, so we can use plain "this"
      */
-    productoReact(producto, this);
+    if (hijoElemento == '.tableBB tbody')
+      productoBBReact(producto, this);
+    else
+      productoEBReact(producto, this);
   });
 }
 
