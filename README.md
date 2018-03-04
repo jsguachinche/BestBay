@@ -1,6 +1,8 @@
 # BestBay
 
-https://jsguachinche.github.io/BestBay/
+* GitHub: [https://github.com/jsguachinche/BestBay](https://github.com/jsguachinche/BestBay)
+* GitHub Pages: [https://jsguachinche.github.io/BestBay/](https://jsguachinche.github.io/BestBay/)
+* Trello: [https://trello.com/b/f3Rmliv2/creaci%C3%B3n-de-proyecto](https://trello.com/b/f3Rmliv2/creaci%C3%B3n-de-proyecto)
 
 ## Integrantes del grupo
 * Yasiel Hernández Rodríguez
