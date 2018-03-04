@@ -1,28 +1,32 @@
-var config = {
-  apiKey: "AIzaSyA7jek9LWz3xNyGDpYtNjHOcw3nn9I8oz0",
-  authDomain: "bestbay-1519376497801.firebaseapp.com",
-  databaseURL: "https://bestbay-1519376497801.firebaseio.com",
-  projectId: "bestbay-1519376497801",
-  storageBucket: "bestbay-1519376497801.appspot.com",
-  messagingSenderId: "730955629296"
-};
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: app.js</title>
 
-firebase.initializeApp(config);
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
 
-// var auth = firebase.auth();
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: app.js</h1>
+
+    
 
 
-var nombre = localStorage.getItem("user");
 
-if (nombre == null) {
-  var h = document.getElementsByClassName('display-5')[0]
-  h.innerHTML = '<b style="font-size:1.5em;text-align: center;">Conectarse desde: </b><div class="social btn" onclick="loginFacebook()"><i class="fab fa-facebook-square"></i></div><div class="social btn" onclick="loginGithub()"><i class="fab fa-github"></i></div><div class="social btn" onclick="loginTwitter()"><i class="fab fa-twitter-square"></i></div><div class="social btn" onclick="LogGoogle()"><i class="fab fa-google"></i></i></div>';
-} else {
-  var h = document.getElementsByClassName('display-5')[0]
-  h.innerHTML = '<b style="font-size:1.5em;text-align: center;">Bienvenido: </b>' + nombre + '<a href="#" onclick="logout()">  Cerrar sesión</a>';
-}
-
-
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
 var apikey = 'jsguachi-JSGuachi-PRD-843252cae-6ff77db1'; // ebay
 var apikeyBB = 'A0iJvovzx1h8jN9IXhGSCwjm'; //bestbuy
 var apikeyForex = 'BunYSIcXTAp38eCsdvLVzkflhfM7VPxH'; // forex
@@ -72,14 +76,14 @@ function _cb_findItemsByKeywords(root) {
   productosEB = [];
 
   $('.tableEB tbody').empty();
-  for (var i = 0; i < items.length; ++i) {
+  for (var i = 0; i &lt; items.length; ++i) {
     var item = items[i];
     var productoEB = new Producto(i + 1, item.galleryURL, item.viewItemURL, item.title, item.sellingStatus[0].currentPrice[0].__value__, item.sellingStatus[0].currentPrice[0]["@currencyId"]);
     productosEB.push(productoEB);
   }
 
   productListReact(productosEB, '#contItem', '.tableEB tbody');
-  $('.ContItem').append('<div id="pagination-1"></div>');
+  $('.ContItem').append('&lt;div id="pagination-1">&lt;/div>');
 
   paginate({
     itemSelector: '.eb',
@@ -88,49 +92,51 @@ function _cb_findItemsByKeywords(root) {
   });
 }
 
-var filterarray = [{
-  "name": `MaxPrice`,
-  "value": `3000`,
-  "paramName": `Currency`,
-  "paramValue": `USD`
-}, {
-  "name": `MinPrice`,
-  "value": `0.1`,
-  "paramName": `Currency`,
-  "paramValue": `USD`
-}, {
-  "name": `FreeShippingOnly`,
-  "value": `true`,
-  "paramName": "",
-  "paramValue": ""
-}, {
-  "name": `ListingType`,
-  "value": [
-    `AuctionWithBIN`, `FixedPrice`, `StoreInventory`
-  ],
-  "paramName": "",
-  "paramValue": ""
-}];
+var filterarray = [
+  {
+    "name": `MaxPrice`,
+    "value": `3000`,
+    "paramName": `Currency`,
+    "paramValue": `USD`
+  }, {
+    "name": `MinPrice`,
+    "value": `0.1`,
+    "paramName": `Currency`,
+    "paramValue": `USD`
+  }, {
+    "name": `FreeShippingOnly`,
+    "value": `true`,
+    "paramName": "",
+    "paramValue": ""
+  }, {
+    "name": `ListingType`,
+    "value": [
+      `AuctionWithBIN`, `FixedPrice`, `StoreInventory`
+    ],
+    "paramName": "",
+    "paramValue": ""
+  }
+];
 
 var urlfilter = "";
 
 /** 
  * Función que construye los filstros de la URL.
- */
+*/
 function buildURLArray() {
   // Iterate through each filter in the array
-  for (var i = 0; i < filterarray.length; i++) {
+  for (var i = 0; i &lt; filterarray.length; i++) {
     var itemfilter = filterarray[i];
     for (var index in itemfilter) {
       // Para los filtros que tengan valor
       if (itemfilter[index] !== "") {
         if (itemfilter[index] instanceof Array) {
-          for (var r = 0; r < itemfilter[index].length; r++) {
+          for (var r = 0; r &lt; itemfilter[index].length; r++) {
             var value = itemfilter[index][r];
-            urlfilter += "&itemFilter\(" + i + "\)." + index + "\(" + r + "\)=" + value;
+            urlfilter += "&amp;itemFilter\(" + i + "\)." + index + "\(" + r + "\)=" + value;
           }
         } else {
-          urlfilter += "&itemFilter\(" + i + "\)." + index + "=" + itemfilter[index];
+          urlfilter += "&amp;itemFilter\(" + i + "\)." + index + "=" + itemfilter[index];
         }
       }
     }
@@ -139,9 +145,9 @@ function buildURLArray() {
 
 /** 
  * Hace que solo sea posible seleccionar un checkbox de cada grupo.
- */
-function unCheckbox() {
-  $("input:checkbox").on('click', function () {
+*/
+function unCheckbox(){
+  $("input:checkbox").on('click', function() {
     var $box = $(this);
     if ($box.is(":checked")) {
       var group = "input:checkbox[name='" + $box.attr("name") + "']";
@@ -200,7 +206,7 @@ function filtrar(tipo) {
 
 /** 
  * Se crean los filtros para la URL según las opciones elegidas.
- */
+*/
 function filtrarBusqueda() {
 
   var filtroFinal = "";
@@ -208,10 +214,10 @@ function filtrarBusqueda() {
   var search = $('#searchvalue').val();
   var arraySearch = []
   arraySearch = search.split(' ');
-  for (let i = arraySearch.length - 1; i >= 0; i--) {
-    if (arraySearch[i] != '')
+    for (let i = arraySearch.length - 1; i >= 0; i--) {
+      if (arraySearch[i] != '')
       filtroFinal += ('%20' + arraySearch[i]);
-  }
+    }
 
   if (ultimoTipoBusqueda == "smartphone") {
     // var marca = [],   memoria = [],   ram = [],   conectividad = [],   color =
@@ -299,7 +305,8 @@ function filtrarBusqueda() {
       // resolucion.push(e.value);
       filtroFinal += '%20' + e.value;
     });
-  } else {
+  }
+  else {
     // var tipo = [] Marca
     var arrayTipoQuery = document.querySelectorAll("input[name='fitnessTipo']:checked");
     arrayTipoQuery.forEach(e => {
@@ -312,9 +319,9 @@ function filtrarBusqueda() {
 
 /** 
  * Se llama a la búsqueda de la API BestBuy, dependiendo de la categoría.
- */
+*/
 function bestBuyFiltrado() {
-
+  
   if (ultimoTipoBusqueda == "smartphone") {
     readBBJson(0, value);
   }
@@ -339,15 +346,15 @@ function ebayFiltrado(tipo) {
   var filterPrice = $('#filter-price').val();
   var url = `https://svcs.ebay.com/services/search/FindingService/v1`;
   url += `?OPERATION-NAME=findItemsByKeywords`;
-  url += `&SERVICE-VERSION=1.0.0`;
-  url += `&SECURITY-APPNAME=${apikey}`;
-  url += `&GLOBAL-ID=EBAY-ES`;
-  url += `&RESPONSE-DATA-FORMAT=JSON`;
-  url += `&callback=_cb_findItemsByKeywords`;
-  url += `&REST-PAYLOAD`;
-  url += `&keywords=${value}`;
-  url += `&paginationInput.entriesPerPage=200`;
-  url += `&sortOrder=${filterPrice}`
+  url += `&amp;SERVICE-VERSION=1.0.0`;
+  url += `&amp;SECURITY-APPNAME=${apikey}`;
+  url += `&amp;GLOBAL-ID=EBAY-ES`;
+  url += `&amp;RESPONSE-DATA-FORMAT=JSON`;
+  url += `&amp;callback=_cb_findItemsByKeywords`;
+  url += `&amp;REST-PAYLOAD`;
+  url += `&amp;keywords=${value}`;
+  url += `&amp;paginationInput.entriesPerPage=200`;
+  url += `&amp;sortOrder=${filterPrice}`
 
   $.ajax({
     url: url,
@@ -359,7 +366,7 @@ function ebayFiltrado(tipo) {
     },
     complete: function (element) {
       buscandoEB = false;
-      if ((buscandoEB == false) && (buscandoBB == false))
+      if ((buscandoEB == false) &amp;&amp; (buscandoBB == false))
         $('.loader').removeClass('is-active');
     },
     fail: function (error, codigo, desc) {
@@ -367,4 +374,26 @@ function ebayFiltrado(tipo) {
       buscandoEB = false;
     }
   });
-}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#_cb_findItemsByKeywords">_cb_findItemsByKeywords</a></li><li><a href="global.html#bestBuyFiltrado">bestBuyFiltrado</a></li><li><a href="global.html#buildURLArray">buildURLArray</a></li><li><a href="global.html#collapseFT">collapseFT</a></li><li><a href="global.html#collapseSM">collapseSM</a></li><li><a href="global.html#collapseTV">collapseTV</a></li><li><a href="global.html#conviertePrecios">conviertePrecios</a></li><li><a href="global.html#ebayFiltrado">ebayFiltrado</a></li><li><a href="global.html#filtrar">filtrar</a></li><li><a href="global.html#filtrarBusqueda">filtrarBusqueda</a></li><li><a href="global.html#generaUrl">generaUrl</a></li><li><a href="global.html#paginarBB">paginarBB</a></li><li><a href="global.html#paginate">paginate</a></li><li><a href="global.html#precioDollarEuro">precioDollarEuro</a></li><li><a href="global.html#Producto">Producto</a></li><li><a href="global.html#productoBBReact">productoBBReact</a></li><li><a href="global.html#productoEBReact">productoEBReact</a></li><li><a href="global.html#readBBJson">readBBJson</a></li><li><a href="global.html#unCheckbox">unCheckbox</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Mar 04 2018 09:14:09 GMT+0000 (Hora estándar GMT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

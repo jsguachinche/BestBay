@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: style.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: style.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var swC = true;
+var swT = true;
+var swF = true;
+
+$(function () {
+  $('#searchvalue').hide();
+  $('#movil').click(function () {
+    $('#searchvalue').show('slow');
+      if (!swC) {
+          $('.myCollapse').hide();
+          swC = true;
+          return;
+      }
+      if (swC) {
+          $('.myCollapse').empty();
+          $('.myCollapse').show('slow');
+          collapseSM();
+          swC = false;
+      }
+  });
+  $('#tv').click(function () {
+    $('#searchvalue').show('slow');
+      if (!swT) {
+          $('.myCollapse').hide();
+          swT = true;
+          return;
+      }
+      if (swT) {
+          $('.myCollapse').empty();
+          $('.myCollapse').show('slow');
+          collapseTV();
+          swT = false;
+      }
+  });
+  $('#fitness').click(function () {
+    $('#searchvalue').show('slow');
+      if (!swF) {
+          $('.myCollapse').hide();
+          swF = true;
+          return;
+      }
+      if (swF) {
+          $('.myCollapse').empty();
+          $('.myCollapse').show('slow');
+          collapseFT()
+          swF = false;
+      }
+
+
+  });
+})
+
+/** 
+ * Se crean todos los filtros para móviles.
+*/
+function collapseSM() {
+  let myCollapse = $('.myCollapse');
+  myCollapse.append(`
+  &lt;div id="accordion" role="tablist" aria-multiselectable="true">
+      &lt;div class="card">
+          &lt;div class="card-header" role="tab" id="headingOne">
+              &lt;h5 class="mb-0 display-6">
+              &lt;a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  PRECIO
+              &lt;/a>
+              &lt;/h5>
+          &lt;/div>
+          &lt;div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+              &lt;div class="card-block filter">
+                  &lt;div class="collapse" id="collapse">
+                      &lt;div class="card card-block">
+                          &lt;p>&lt;label for="desde" class="col-form-label">Desde&lt;/label>&lt;/p>
+                          &lt;p>&lt;input type="number" class="col-sm" name="desde" min="1" max="2000" value="1">&lt;/p>
+                          &lt;p>&lt;label for="hasta" class="col-form-label">Hasta&lt;/label>&lt;/p>
+                          &lt;p>&lt;input type="number" class="col-sm" name="hasta" min="1" max="2000" value="2000">&lt;/p>
+                      &lt;/div>
+                  &lt;/div>
+              &lt;/div>
+          &lt;/div>
+      &lt;/div>
+      &lt;div class="card">
+          &lt;div class="card-header" role="tab" id="headingTwo">
+              &lt;h5 class="mb-0 display-6">
+              &lt;a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  MARCA
+              &lt;/a>
+              &lt;/h5>
+          &lt;/div>
+          &lt;div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+              &lt;div class="card-block">
+                  &lt;p>&lt;input type="checkbox" id="movil" name="movilMarca" value="Apple"> Apple&lt;/p>
+                  &lt;p>&lt;input type="checkbox" id="movil" name="movilMarca" value="Samsung"> Samsung&lt;/p>
+                  &lt;p>&lt;input type="checkbox" id="movil" name="movilMarca" value="LG"> LG&lt;/p>
+                  &lt;p>&lt;input type="checkbox" id="movil" name="movilMarca" value="Sony"> Sony&lt;/p>
+                  &lt;p>&lt;input type="checkbox" id="movil" name="movilMarca" Motorola="Motorola"> Motorola&lt;/p>
+              &lt;/div>
+          &lt;/div>
+      &lt;/div>
+      &lt;div class="card">
+          &lt;div class="card-header" role="tab" id="headingThree">
+              &lt;h5 class="mb-0 display-6">
+              &lt;a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  M. INTERNA
+              &lt;/a>
+              &lt;/h5>
+          &lt;/div>
+          &lt;div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+              &lt;div class="card-block">
+                  &lt;p>&lt;input type="checkbox" name="movilMemoria" value="8GB"> 8GB&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="movilMemoria" value="16GB"> 16GB&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="movilMemoria" value="32GB"> 32GB&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="movilMemoria" value="64GB"> 64GB&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="movilMemoria" value="128GB"> 128GB&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="movilMemoria" value="256GB"> 256GB&lt;/p>
+              &lt;/div>
+          &lt;/div>
+      &lt;/div>
+      &lt;div class="card">
+          &lt;div class="card-header" role="tab" id="headingFourth">
+              &lt;h5 class="mb-0 display-6">
+              &lt;a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFourth" aria-expanded="false" aria-controls="collapseFourth">
+                  M. RAM
+              &lt;/a>
+              &lt;/h5>
+          &lt;/div>
+          &lt;div id="collapseFourth" class="collapse" role="tabpanel" aria-labelledby="headingFourth">
+              &lt;div class="card-block">
+                  &lt;p>&lt;input type="checkbox" name="movilRam" value="2GB"> 2GB&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="movilRam" value="3GB"> 3GB&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="movilRam" value="4GB"> 4GB&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="movilRam" value="6GB"> 6GB&lt;/p>
+              &lt;/div>
+          &lt;/div>
+      &lt;/div>
+      &lt;div class="card">
+          &lt;div class="card-header" role="tab" id="headingFive">
+              &lt;h5 class="mb-0 display-6">
+              &lt;a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                 CONECTIVIDAD
+              &lt;/a>
+              &lt;/h5>
+          &lt;/div>
+          &lt;div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingFive">
+              &lt;div class="card-block">
+                  &lt;p>&lt;input type="checkbox" name="movilConectividad" value="3G"> 3G&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="movilConectividad" value="4G"> 4G&lt;/p>
+              &lt;/div>
+          &lt;/div>
+      &lt;/div>
+      &lt;div class="card">
+          &lt;div class="card-header" role="tab" id="headingSix">
+              &lt;h5 class="mb-0 display-6">
+              &lt;a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                 COLOR
+              &lt;/a>
+              &lt;/h5>
+          &lt;/div>
+          &lt;div id="collapseSix" class="collapse" role="tabpanel" aria-labelledby="headingSix">
+              &lt;div class="card-block">
+                  &lt;p>&lt;input type="checkbox" name="movilColor" value="White"> Blanco&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="movilColor" value="Silver"> Gris&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="movilColor" value="Black"> Negro&lt;/p>
+              &lt;/div>
+          &lt;/div>
+      &lt;/div>
+      &lt;div class="card">
+          &lt;div class="card-header" role="tab" id="headingSeven">
+              &lt;h5 class="mb-0 display-6">
+              &lt;a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                 SISTEMA OPERATIVO
+              &lt;/a>
+              &lt;/h5>
+          &lt;/div>
+          &lt;div id="collapseSeven" class="collapse" role="tabpanel" aria-labelledby="headingSeven">
+              &lt;div class="card-block">
+                  &lt;p>&lt;input type="checkbox" name="movilOS" value="Android"> Android&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="movilOS" value="IOS"> IOS&lt;/p>
+              &lt;/div>
+          &lt;/div>
+      &lt;/div>
+  &lt;/div>    
+  `);
+  myCollapse.append('&lt;button type="button" class="btn btn-sm btn-block btn-outline-success" id="search" onclick="filtrar()">Filtrar&lt;/button>');
+}
+
+/** 
+ * Se crean todos los filtros para televisión.
+*/
+function collapseTV() {
+  let myCollapse = $('.myCollapse');
+  myCollapse.append(`
+  &lt;div id="accordion" role="tablist" aria-multiselectable="true">
+      &lt;div class="card">
+          &lt;div class="card-header" role="tab" id="headingOne">
+              &lt;h5 class="mb-0 display-6">
+              &lt;a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  PRECIO
+              &lt;/a>
+              &lt;/h5>
+          &lt;/div>
+          &lt;div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+              &lt;div class="card-block filter">
+                  &lt;div class="collapse" id="collapse">
+                      &lt;div class="card card-block">
+                          &lt;p>&lt;label for="desde" class="col-form-label">Desde&lt;/label>&lt;/p>
+                          &lt;p>&lt;input type="number" class="col-sm" name="desde" min="1" max="2000" value="1">&lt;/p>
+                          &lt;p>&lt;label for="hasta" class="col-form-label">Hasta&lt;/label>&lt;/p>
+                          &lt;p>&lt;input type="number" class="col-sm" name="hasta" min="1" max="2000" value="2000">&lt;/p>
+                      &lt;/div>
+                  &lt;/div>
+              &lt;/div>
+          &lt;/div>
+      &lt;/div>
+      &lt;div class="card">
+          &lt;div class="card-header" role="tab" id="headingTwo">
+              &lt;h5 class="mb-0 display-6">
+              &lt;a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  MARCA
+              &lt;/a>
+              &lt;/h5>
+          &lt;/div>
+          &lt;div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+              &lt;div class="card-block">
+                  &lt;p>&lt;input type="checkbox" name="tvMarca" value="Sharp"> Sharp&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="tvMarca" value="Samsung"> Samsung&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="tvMarca" value="LG"> LG&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="tvMarca" value="Sony"> Sony&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="tvMarca" Toshiba="Toshiba"> Toshiba&lt;/p>
+              &lt;/div>
+          &lt;/div>
+      &lt;/div>
+      &lt;div class="card">
+          &lt;div class="card-header" role="tab" id="headingThree">
+              &lt;h5 class="mb-0 display-6">
+              &lt;a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  TIPO DE PANTALLA
+              &lt;/a>
+              &lt;/h5>
+          &lt;/div>
+          &lt;div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+              &lt;div class="card-block">
+                  &lt;p>&lt;input type="checkbox" name="tvPantalla" value="LED"> LED&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="tvPantalla" value="Curvo"> Curvo&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="tvPantalla" value="OLED"> OLED&lt;/p>
+              &lt;/div>
+          &lt;/div>
+      &lt;/div>
+      &lt;div class="card">
+          &lt;div class="card-header" role="tab" id="headingFourth">
+              &lt;h5 class="mb-0 display-6">
+              &lt;a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFourth" aria-expanded="false" aria-controls="collapseFourth">
+                  COLOR
+              &lt;/a>
+              &lt;/h5>
+          &lt;/div>
+          &lt;div id="collapseFourth" class="collapse" role="tabpanel" aria-labelledby="headingFourth">
+              &lt;div class="card-block">
+                  &lt;p>&lt;input type="checkbox" name="tvColor" value="White"> Blanco&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="tvColor" value="Grey"> Gris&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="tvColor" value="Black"> Negro&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="tvColor" value="Red"> Rojo&lt;/p>
+              &lt;/div>
+          &lt;/div>
+      &lt;/div>
+      &lt;div class="card">
+          &lt;div class="card-header" role="tab" id="headingFive">
+              &lt;h5 class="mb-0 display-6">
+              &lt;a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                  PULGADAS
+              &lt;/a>
+              &lt;/h5>
+          &lt;/div>
+          &lt;div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingFive">
+              &lt;div class="card-block">
+                  &lt;p>&lt;input type="checkbox" name="tvPulgadas" value="20 - 39 "> 20 - 39 &lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="tvPulgadas" value="30 - 39"> 30 - 39&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="tvPulgadas" value="40 - 49"> 40 - 49&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="tvPulgadas" value="50 - 60"> 50 - 60&lt;/p>
+              &lt;/div>
+          &lt;/div>
+      &lt;/div>
+      &lt;div class="card">
+          &lt;div class="card-header" role="tab" id="headingSix">
+              &lt;h5 class="mb-0 display-6">
+              &lt;a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                 RESOLUCION
+              &lt;/a>
+              &lt;/h5>
+          &lt;/div>
+          &lt;div id="collapseSix" class="collapse" role="tabpanel" aria-labelledby="headingSix">
+              &lt;div class="card-block">
+                  &lt;p>&lt;input type="checkbox" name="tvResolucion " value="480p"> 480p &lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="tvResolucion value="720p"> 720p (HD)&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="tvResolucion" value="1080p"> 1080p (HD)&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="tvResolucion" value="4k"> 2160p (4K Ultra HD)&lt;/p>
+              &lt;/div>
+          &lt;/div>
+      &lt;/div>
+  &lt;/div>    
+  `);
+  myCollapse.append('&lt;button type="button" class="btn btn-sm btn-block btn-outline-success" id="search" onclick="filtrar()">Filtrar&lt;/button>');
+}
+
+/** 
+ * Se crean todos los filtros para  fitness.
+*/
+function collapseFT(){
+  let myCollapse = $('.myCollapse');
+  myCollapse.append(`
+  &lt;div id="accordion" role="tablist" aria-multiselectable="true">
+      &lt;div class="card">
+          &lt;div class="card-header" role="tab" id="headingOne">
+              &lt;h5 class="mb-0 display-6">
+              &lt;a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  PRECIO
+              &lt;/a>
+              &lt;/h5>
+          &lt;/div>
+          &lt;div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+              &lt;div class="card-block filter">
+                  &lt;div class="collapse" id="collapse">
+                      &lt;div class="card card-block">
+                          &lt;p>&lt;label for="desde" class="col-form-label">Desde&lt;/label>&lt;/p>
+                          &lt;p>&lt;input type="number" class="col-sm" name="desde" min="1" max="2000" value="1">&lt;/p>
+                          &lt;p>&lt;label for="hasta" class="col-form-label">Hasta&lt;/label>&lt;/p>
+                          &lt;p>&lt;input type="number" class="col-sm" name="hasta" min="1" max="2000" value="2000">&lt;/p>
+                      &lt;/div>
+                  &lt;/div>
+              &lt;/div>
+          &lt;/div>
+      &lt;/div>
+      &lt;div class="card">
+          &lt;div class="card-header" role="tab" id="headingTwo">
+              &lt;h5 class="mb-0 display-6">
+              &lt;a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  TIPO
+              &lt;/a>
+              &lt;/h5>
+          &lt;/div>
+          &lt;div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+              &lt;div class="card-block">
+                  &lt;p>&lt;input type="checkbox" name="fitnessTipo" value="Shavers, Trimmers &amp; Groomers"> Shavers, Trimmers &amp; Groomers &lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="fitnessTipo" value="Hair Care"> Hair Care&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="fitnessTipo" value="Oral Care"> Oral Care&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="fitnessTipo" value="Massagers &amp; Spa"> Massagers &amp; Spa&lt;/p>
+                  &lt;p>&lt;input type="checkbox" name="fitnessTipo" value="Skin Care"> Skin Care&lt;/p>
+              &lt;/div>
+          &lt;/div>
+      &lt;/div>
+  &lt;/div>    
+  `);
+  myCollapse.append('&lt;button type="button" class="btn btn-sm btn-block btn-outline-success" id="search" onclick="filtrar()">Filtrar&lt;/button>');
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#_cb_findItemsByKeywords">_cb_findItemsByKeywords</a></li><li><a href="global.html#bestBuyFiltrado">bestBuyFiltrado</a></li><li><a href="global.html#buildURLArray">buildURLArray</a></li><li><a href="global.html#collapseFT">collapseFT</a></li><li><a href="global.html#collapseSM">collapseSM</a></li><li><a href="global.html#collapseTV">collapseTV</a></li><li><a href="global.html#conviertePrecios">conviertePrecios</a></li><li><a href="global.html#ebayFiltrado">ebayFiltrado</a></li><li><a href="global.html#filtrar">filtrar</a></li><li><a href="global.html#filtrarBusqueda">filtrarBusqueda</a></li><li><a href="global.html#generaUrl">generaUrl</a></li><li><a href="global.html#paginarBB">paginarBB</a></li><li><a href="global.html#paginate">paginate</a></li><li><a href="global.html#precioDollarEuro">precioDollarEuro</a></li><li><a href="global.html#Producto">Producto</a></li><li><a href="global.html#productoBBReact">productoBBReact</a></li><li><a href="global.html#productoEBReact">productoEBReact</a></li><li><a href="global.html#readBBJson">readBBJson</a></li><li><a href="global.html#unCheckbox">unCheckbox</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Mar 04 2018 09:14:09 GMT+0000 (Hora estándar GMT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

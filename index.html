@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="css/master.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/css-loader.css">
-    <link href="/css/simplePagination.css" rel="stylesheet">
+    <link href="css/toastr.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/simplePagination.css" rel="stylesheet">
     <title>BEST BAY</title>
 </head>
 
@@ -18,8 +19,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
-	
-	
+
+
     <div class="loader loader-default"></div>
     <div id="fb-root"></div>
 
@@ -28,18 +29,28 @@
         <img src="resources/images/bestbay.png" alt="BestBay Logo" class="img-title">
         <h2 class="subtitle">Su sitio de compra Online</h2>
         <div class="socials">
-            <label for="Iniciar sesión con" class="display-5"><b style="font-size:1.5em;text-align: center;">Conectarse desde:   </b>  
-                    <div class="social btn" onclick="loginFacebook()"><i class="fab fa-facebook-square"></i></div>
-                    <div class="social btn" onclick="loginGithub()"><i class="fab fa-github"></i></div>
-                    <div class="social btn" onclick="loginTwitter()"><i class="fab fa-twitter-square"></i></div>
-                    <div class="social btn" onclick="LogGoogle()"><i class="fab fa-google"></i></i></div>
-                    
+            <label for="Iniciar sesión con" class="display-5">
+                <b style="font-size:1.5em;text-align: center;">Conectarse desde: </b>
+                <div class="social btn" onclick="loginFacebook()">
+                    <i class="fab fa-facebook-square"></i>
+                </div>
+                <div class="social btn" onclick="loginGithub()">
+                    <i class="fab fa-github"></i>
+                </div>
+                <div class="social btn" onclick="loginTwitter()">
+                    <i class="fab fa-twitter-square"></i>
+                </div>
+                <div class="social btn" onclick="LogGoogle()">
+                    <i class="fab fa-google"></i>
+                    </i>
+                </div>
+
             </label>
         </div>
         <div class="clear"></div>
     </div>
-    
-    
+
+
     <!-- Container -->
     <div class="myContainer">
 
@@ -72,24 +83,24 @@
                     <div class="myCollapse"></div>
                 </div>
             </div>
-			
-			<div class="ContItem" id="ContItem">
-                <img src="resources/images/ebay.png" alt="EBay" class="img-t-1">
-				<table class="tableEB table table-hover">
-                        <tbody>
-    
-                        </tbody>
-                    </table>
-            </div>
-			
-			<div class="ContItemBB" id="ContItemBB">
-                <img src="resources/images/bestbuy.png" alt="BestBuy" class="img-t-2">
-				<table class="tableBB table table-hover">
-					<tbody>
 
-					</tbody>
-				</table>
-			</div>
+            <div class="ContItem" id="ContItem">
+                <img src="resources/images/ebay.png" alt="EBay" class="img-t-1">
+                <table class="tableEB table table-hover">
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="ContItemBB" id="ContItemBB">
+                <img src="resources/images/bestbuy.png" alt="BestBuy" class="img-t-2">
+                <table class="tableBB table table-hover">
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -109,19 +120,21 @@
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-        <script src="js/lib/jquery.simplePagination.js"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-    <script src="js/lib/style.js"></script>
+    <script src="js/lib/jquery.simplePagination.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <script src="js/lib/toastr.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+    
+    <script src="js/style.js"></script>
     <script src="js/app.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
     <script src="js/lib/widget-git.js"></script>
     <script src="js/lib/widget-fb.js"></script>
     <script src="js/lib/widget-twitter.js"></script>
     <script src="js/lib/widget-google.js"></script>
-	<script type="text/babel" src="js/reactproducto.js"></script>
-    <script  type="text/babel" src="js/jqueryproductos.js"></script>
-
+    <script src="js/lib/widget-logout.js"></script>    
+    <script type="text/babel" src="js/reactproducto.js"></script>
+    <script type="text/babel" src="js/jqueryproductos.js"></script>
     <script src="js/bestbuy.js"></script>
 </body>
 

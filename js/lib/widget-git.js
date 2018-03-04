@@ -1,13 +1,4 @@
 function loginGithub() {
-    var config = {
-        apiKey: "AIzaSyA7jek9LWz3xNyGDpYtNjHOcw3nn9I8oz0",
-        authDomain: "bestbay-1519376497801.firebaseapp.com",
-        databaseURL: "https://bestbay-1519376497801.firebaseio.com",
-        projectId: "bestbay-1519376497801",
-        storageBucket: "bestbay-1519376497801.appspot.com",
-        messagingSenderId: "730955629296"
-      };
-    firebase.initializeApp(config);
 
     var auth = firebase.auth();
 
@@ -15,6 +6,10 @@ function loginGithub() {
     auth.signInWithPopup(provider).then(function (result) {
         // User signed in!
         console.log(result);
+        var nombre = result.additionalUserInfo.username;
+        localStorage.setItem("user", nombre)
+        var h = document.getElementsByClassName('display-5')[0]
+        h.innerHTML = '<b style="font-size:1.5em;text-align: center;">Bienvenido: </b>'+nombre + '<a href="#" onclick="logout()">  Cerrar sesión</a>';
 
     }).catch(function (error) {
         // An error occurred
