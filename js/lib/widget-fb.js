@@ -12,6 +12,6 @@ function loginFacebook() {
         h.innerHTML = '<b style="font-size:1.5em;text-align: center;">Bienvenido: </b>'+nombre + '<a href="#" onclick="logout()">  Cerrar sesión</a>';
 
     }).catch(function (error) {
-        // An error occurred
+        console.log(error)
     });
 }
